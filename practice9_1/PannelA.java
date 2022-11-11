@@ -11,7 +11,7 @@ import javax.swing.*;
  *
  */
 public class PannelA extends JPanel{
-	JLabel label;
+	static JLabel label; //global하게 어느 클래스에서도 객체 사용 가능
 	
 	//panel 생성자
 	public PannelA() {

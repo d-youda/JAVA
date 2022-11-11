@@ -1,6 +1,7 @@
 package practice9_1;
 
 import java.awt.*;
+import java.awt.event.*;
 
 import javax.swing.*;
 
@@ -30,5 +31,21 @@ public class PannelB extends JPanel{
 		add(button1);
 		add(button2);
 		add(button3);
+		
+		ActionListener listener = new MyActionListener();
+		button1.addActionListener(listener);
+		button2.addActionListener(listener);
+		button3.addActionListener(listener);
+	}
+	class MyActionListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+//			System.out.println(e.getActionCommand());
+			PannelA.label.setText(e.getActionCommand());
+			
+			
+		}
+		
 	}
 }
