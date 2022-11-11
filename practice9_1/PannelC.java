@@ -10,7 +10,8 @@ import javax.swing.*;
  */
 public class PannelC extends JPanel{
 	public PannelC(PannelA pa){
-		//판넬B 포함
+		//판넬B 포함,
+		//판넬A에 판넬B에서의 값을 출력시키기 떄문에 판넬A를 판넬B에 넣어줌
 		add(new PannelB(pa));
 	}
 }

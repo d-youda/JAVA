@@ -17,8 +17,9 @@ public class PannelB extends JPanel{
 	PannelA pa;
 	//생성자
 	public PannelB(PannelA pa){
-		//파란 배경
+		//pannelA를 받아옴
 		this.pa = pa;
+		//파란 배경
 		setBackground(Color.BLUE);
 
 		//버튼 레이아웃 설정
@@ -34,20 +35,22 @@ public class PannelB extends JPanel{
 		add(button2);
 		add(button3);
 		
+		//버튼들 모두 마우스 리스너 추가
 		ActionListener listener = new MyActionListener();
+//		addMouseMotionListener(new MyMouseMotinListener());
 		button1.addActionListener(listener);
 		button2.addActionListener(listener);
 		button3.addActionListener(listener);
+		
 	}
 	class MyActionListener implements ActionListener{
-
+		//마우스로 버튼 클릭할 경우, 버튼에 있는 text가 label 자리에 출력되도록 함
 		@Override
 		public void actionPerformed(ActionEvent e) {
 //			System.out.println(e.getActionCommand());
 			pa.label.setText(e.getActionCommand());
-
-
 		}
-
 	}
+	
+	
 }

@@ -1,6 +1,10 @@
 package practice9_1;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+
 import javax.swing.*;
 /**
  * 판넬들 배치하는 클래스
@@ -19,9 +23,11 @@ public class FigureEditor extends JFrame{
 		//큰 판넬에 작은 판넬들 부착
 		add(pa,BorderLayout.CENTER);
 		add(new PannelC(pa), BorderLayout.WEST);
-
+		
 		//panel 출력하기(보이도록!)
 		setVisible(true);
 
 	}
+	
+
 }
