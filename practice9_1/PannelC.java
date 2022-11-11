@@ -8,9 +8,9 @@ import javax.swing.*;
  * @author 유다현
  *
  */
-//public class PannelC extends JPanel{
-//	public PannelC(){
-//		//판넬B 포함
-//		add(new PannelB());
-//	}
-//}
+public class PannelC extends JPanel{
+	public PannelC(PannelA pa){
+		//판넬B 포함
+		add(new PannelB(pa));
+	}
+}

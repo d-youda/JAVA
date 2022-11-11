@@ -12,3 +12,42 @@ import javax.swing.*;
  * 3개의 버튼 컴포넌트
  * @author 유다현
  */
+public class PannelB extends JPanel{
+	JButton button1 , button2 , button3;
+	PannelA pa;
+	//생성자
+	public PannelB(PannelA pa){
+		//파란 배경
+		this.pa = pa;
+		setBackground(Color.BLUE);
+
+		//버튼 레이아웃 설정
+		setLayout(new GridLayout(3,1,5,5));
+
+		//버튼 설정
+		button1 = new JButton("사각");
+		button2 = new JButton("직선");
+		button3 = new JButton("타원");
+
+		//버튼 추가
+		add(button1);
+		add(button2);
+		add(button3);
+		
+		ActionListener listener = new MyActionListener();
+		button1.addActionListener(listener);
+		button2.addActionListener(listener);
+		button3.addActionListener(listener);
+	}
+	class MyActionListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+//			System.out.println(e.getActionCommand());
+			pa.label.setText(e.getActionCommand());
+
+
+		}
+
+	}
+}
