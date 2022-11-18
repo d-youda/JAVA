@@ -28,6 +28,4 @@ public class FigureEditor extends JFrame{
 		setVisible(true);
 
 	}
-	
-
 }
