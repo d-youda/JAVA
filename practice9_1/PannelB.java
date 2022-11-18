@@ -52,6 +52,4 @@ public class PannelB extends JPanel{
 			pa.label.setText(e.getActionCommand());
 		}
 	}
-	
-	
 }

@@ -6,9 +6,8 @@ import javax.swing.*;
 
 /**
  * 첫 번쨰 패널
- * 노란 배경, 컴포넌트 하나
+ * 노란 배경, 마우스 리스너들 추가하여 화면에 도형 출력시킴
  * @author 유다현
- *
  */
 public class PannelA extends JPanel{
 	JLabel label;
@@ -32,6 +31,10 @@ public class PannelA extends JPanel{
 		setLayout(null);
 		label.setSize(50,20);
 		label.setLocation(30,30);
+		//저장된 도형들 계속 출력되어 있게 하기
+		for(int i=0 ; i<shapes.size() ; i++) {
+			shapes.get(i);
+		}
 	}
 	
 	//여러 개의 마우스 리스너를 넣기 위해 만든 클래스 
@@ -50,15 +53,16 @@ public class PannelA extends JPanel{
 			//폭과 너비는 빼서 절댓값 받아, 음수가 들어오지 않도록 함
 			int width = Math.abs(start.x - end.x);
 			int height = Math.abs(start.y - end.y);
-
-			//Shap 선언
-			Shape s = null;
 			
-			//누른 버튼 이름에 맞게 도형 출력되도록 함
-			if(label.getText().equals("사각"))
-				new Rectangle(x,y,width,height);
+			//누른 버튼 이름에 맞게 출력된 도형들 shapes list에 add되도록 함
+			if(label.getText().equals("사각")) 
+				shapes.add(new Rectangle(x,y,width,height));
+			
 			else if(label.getText().equals("타원"))
-				new Eclipse(x,y,width,height);
+				shapes.add(new Eclipse(x,y,width,height));
+			else if(label.getText().equals("직선"))
+				shapes.add(new Line(start.x,start.y,end.x,end.y));
+			
 
 		}
 		@Override
@@ -84,21 +88,32 @@ public class PannelA extends JPanel{
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
+		//시작안하면 가만히 있음
 		if(start==null)
 			return;
 		g.setColor(Color.BLUE);
+		
+		//그리기 시작하는 점과 갱신되는 점 중 작은 값을 그리기 시작위치로 둠
 		int x = Math.min(start.x, end.x);
 		int y = Math.min(start.y, end.y);
         int width = Math.abs(start.x - end.x);
         int height = Math.abs(start.y - end.y);
         
-        if (label.getText().equals("타원"))
-        	g.drawOval(x, y, width, height); // 타원 그리기
+        //화면에 도형들 그리기
+        if (label.getText().equals("타원")) {
+        	g.drawOval(x, y, width, height); 
+        }
+        	
         else if (label.getText().equals("사각"))
         	g.drawRect(x, y, width, height);
         else if (label.getText().equals("직선"))
         	g.drawLine(start.x,start.y, end.x, end.y);
 
+        //Shapes안에 있는 도형들 계속 출력되어 있도록 설정
+        for(Shape shape: shapes) {
+			shape.draw(g);
+//			g.dispose();
+		}
 	}
 }
 
