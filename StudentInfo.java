@@ -23,11 +23,9 @@ public class StudentInfo {
 
     }
     public static void saveDataToFile(ArrayList<Student> students, String fileName)  {
-    	//버퍼에서 입력받기
-    	BufferedReader inputStream = null;
+    	//input은 students이고, output을 파일에 두고 출력함
     	PrintWriter outputStream = null;
     	try {
-    		inputStream = new BufferedReader(new FileReader(fileName));
 			outputStream = new PrintWriter(new FileWriter(fileName));
 			
 			//students에 있는 애들 file로 옮겨 적기
@@ -38,7 +36,6 @@ public class StudentInfo {
 			
 			//열었던 파일 닫아주기
 			outputStream.close();
-			inputStream.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -53,6 +50,8 @@ public class StudentInfo {
     }
 
     public static void saveObjectToFile(ArrayList<Student> students, String fileName) {
+    	
+    	//객체 스트림 코드 : input은 student이고, output은 filename에 저장함.
     	ObjectOutputStream out = null;
     	try {
 			out = new ObjectOutputStream(new FileOutputStream(fileName));
