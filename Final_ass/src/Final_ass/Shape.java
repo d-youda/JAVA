@@ -28,10 +28,10 @@ class Rectangle extends Shape{
 	}
 }
 
-class Eclipse extends Shape{
+class Oval extends Shape{
 	int width;
 	int height;
-	public Eclipse(int x, int y ,int width, int height) {
+	public Oval(int x, int y ,int width, int height) {
 		super(x,y);
 		this.width = width;
 		this.height = height;
@@ -43,14 +43,14 @@ class Eclipse extends Shape{
 }
 
 class Line extends Shape{
-	int x2;
-	int y2;
+	int endx;
+	int endy;
 	public Line(int x1, int y1, int x2, int y2) {
 		super(x1,y1);
-		this.x2 = x2;
-		this.y2 = y2;
+		this.endx = x2;
+		this.endy = y2;
 	}
 	public void draw(Graphics g) {
-		g.drawLine(x, y, x2, y2);
+		g.drawLine(x, y, endx, endy);
 	}
 }
