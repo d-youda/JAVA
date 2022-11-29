@@ -6,7 +6,7 @@ import javax.swing.*;
 
 public class FigureEditor extends JFrame{
     PanelA pa;
-	static char cmd = 'N';
+	static char cmd = 'N'; //도형 구분하는 cmd?
 	//기본 프레임 만들기
 	public FigureEditor(){
 		setTitle("MyFrame"); //출력되는 panel의 이름 설정
@@ -22,8 +22,16 @@ public class FigureEditor extends JFrame{
 		setVisible(true);
 	}
 	class MyListner implements ActionListener{
-		public void actionPerformed(ActionEvent e){
-
+		public void actionPerformed(ActionEvent e) {
+			if(e.getActionCommand()=="사각") {
+				cmd = 'R';
+			}else if(e.getActionCommand()=="직선") {
+				cmd = 'L';
+			}else if(e.getActionCommand()=="타원") {
+				cmd = 'E';
+			}else {
+				cmd = 'N';
+				
 		}
 	}
 	
@@ -67,7 +75,7 @@ public class FigureEditor extends JFrame{
 			void clickShape(int x, int y) {
 				if(shapes !=null) {
 					for(Shape s : shapes) {
-						if(s instanceof Line && FigureEditorFrame.cmd == 'N') {
+						if(s instanceof Line && FigureEditor.cmd == 'N') {
 							Line l = (Line)s;
 							if((Math.min(l.x,l.endx)<=x && x<=Math.max(l.x,l.endx)) && (Math.min(l.y,l.endy)<=y && y<=Math.max(l.y,l.endy))) {
 								check = 1;
@@ -75,7 +83,7 @@ public class FigureEditor extends JFrame{
 								return;
 							}
 						}
-						else if(FigureEditorFrame.cmd=='N' && s instanceof Rectangle) {
+						else if(FigureEditor.cmd=='N' && s instanceof Rectangle) {
 							Rectangle r = (Rectangle)s;
 							if((r.x<=x && x<=r.x+r.width) && r.y<=y && y<=r.y+r.height) {
 							check = 1;
@@ -83,7 +91,7 @@ public class FigureEditor extends JFrame{
 							return;
 							}	
 						}
-						else if(FigureEditorFrame.cmd=='N' && s instanceof Oval) {
+						else if(FigureEditor.cmd=='N' && s instanceof Oval) {
 							Oval o = (Oval)s;
 							if((o.x<=x && x<=o.x+o.width) && o.y<=y && y<=o.y+o.height) {
 								check = 1;
@@ -103,13 +111,13 @@ public class FigureEditor extends JFrame{
 				clickShape(e.getX(),e.getY());
 				switch(check) {
 				case 1:{
-					littleShapeArray.removeAll(littleShapeArray);
+					miniBox.removeAll(miniBox);
 					if(checkShape instanceof Rectangle) {
 						Rectangle r = (Rectangle)checkShape;
 						s1 = new Rectangle((r.x) - 2, (r.y) - 2, 4, 4);
 						s2 = new Rectangle((r.x) + r.width - 2, (r.y) + r.height - 2, 4, 4);
-						littleShapeArray.add(s1);
-						littleShapeArray.add(s2);
+						miniBox.add(s1);
+						miniBox.add(s2);
 						repaint();
 						check = 0;
 						break;
@@ -117,8 +125,8 @@ public class FigureEditor extends JFrame{
 						Line l = (Line) checkShape;
 						s1 = new Rectangle((l.x) - 2, (l.y) - 2, 4, 4);
 						s2 = new Rectangle((l.endx) - 2, (l.endy) - 2, 4, 4);
-						littleShapeArray.add(s1);
-						littleShapeArray.add(s2);
+						miniBox.add(s1);
+						miniBox.add(s2);
 						repaint();
 						check = 0;
 						break;
@@ -126,8 +134,8 @@ public class FigureEditor extends JFrame{
 						Oval o = (Oval) checkShape;
 						s1 = new Rectangle((o.x) - 2, (o.y) - 2, 4, 4);
 						s2 = new Rectangle((o.x) + o.width - 2, (o.y) + o.height - 2, 4, 4);
-						littleShapeArray.add(s1);
-						littleShapeArray.add(s2);
+						miniBox.add(s1);
+						miniBox.add(s2);
 						repaint();
 						check = 0;
 						break;
@@ -135,8 +143,8 @@ public class FigureEditor extends JFrame{
 				}
 				case -1:
 				{
-					if(FigureEditorFrame.cmd == 'N')
-						littleShapeArray.removeAll(littleShapeArray);
+					if(FigureEditor.cmd == 'N')
+					miniBox.removeAll(miniBox);
 					check = 0;
 					repaint();
 					break;
@@ -170,7 +178,7 @@ public class FigureEditor extends JFrame{
 						shapes.add(new Rectangle(x,y,width,height));
 					
 					else if(label.getText().equals("타원"))
-						shapes.add(new Eclipse(x,y,width,height));
+						shapes.add(new Oval(x,y,width,height));
 					else if(label.getText().equals("직선"))
 						shapes.add(new Line(start.x,start.y,end.x,end.y));
 					else if(label.getText().equals("복사"))
@@ -192,7 +200,7 @@ public class FigureEditor extends JFrame{
 					super.mouseDragged(e);
 					end = e.getPoint();
 					repaint();//마우스 드래그 할 때마다 도형 그리기
-					a = littleShapeArray.get(littleShapeArray.size()-1);//...?
+					a = miniBox.get(miniBox.size()-1);//...?
 				}
 				@Override
 				public void mousePressed(MouseEvent e) {
