@@ -1,9 +1,7 @@
-package Final_ass;
+package Final_project;
 import java.awt.Graphics;
-
-//캡슐화 위한 Shape 객체 생성-> 출력될 도형들의 클래스!
 abstract class Shape {
-	int x;
+    int x;
 	int y;
 	
 	public Shape(int x, int y) {
